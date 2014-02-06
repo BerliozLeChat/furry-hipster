@@ -59,6 +59,55 @@ void Associative::associer(K clf,V valr){
 		}
 }
 
+bool Associative::estALVide(){
+		return(this->nb==0);
+}
+
+V Associative::valeurAssociée(K clf){
+	if(this->nb!=0){
+		maillon * courant = this->tete;
+		while(courant != NULL && trouve==false){
+			if(courant->clf==cle){
+				trouve=true;
+			}
+			else{
+				courant = courant->suivant;
+			}
+		}
+		if(trouve==true){
+				return courant->elt;
+			}
+		else
+			return NULL;
+	}
+}
+
+void Associative::dissocier(K clf){
+		if(this->nb >= 1){
+			courant=this->tete;
+			if(courant->clf == clf){
+				this->tete=courant->suivant;
+				delete(courant);
+			}
+			else{
+					trouve=false;
+					while(courant->suivant != NULL && trouve ==false){
+						if(courant->suivant->clf==clf){
+							trouve=true;
+						}
+						else{
+							courant=courant->suivant;
+						}
+					}
+					if(trouve==true){
+							maillon * tmp = courant->suivant->suivant;
+							delete(courant->suivant);
+							courant->suivant=tmp;
+					}
+			}
+		}
+}
+
 
 bool Associative::estClef(k cle){
 		
@@ -78,20 +127,19 @@ bool Associative::estClef(k cle){
 		}
 }
 
-bool Associative::estALVide(){
-		return(this->nb==0);
-}
-
-V Associative::valeurAssociée(K clf){
-	while(courant != NULL && trouve==false){
-				if(courant->clf==cle){
-					trouve=true;
+void Associative::trousseau(K* clfs, int ref N ){
+		if(this->nb!=0){
+				maillon * courant=this->tete;
+				N=0;
+				
+				while(courant != NULL){
+					clfs[N] = courant->clf;
+					N = N + 1
+					courant=courant->suivant;
 				}
-				else{
-					courant = courant->suivant;
-				}
+				
 		}
-		if(trouve==true){
-			return courant->elt;
+		else{
+				N=0;
 		}
 }
