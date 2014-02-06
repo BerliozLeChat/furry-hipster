@@ -1,23 +1,13 @@
-
-template <typename K, typename V>
-class Associative{
+template <typename K,typename V>
+class Hashage{
 	private:
 	
-		typedef struct maillon maillon;
-		struct maillon{
-				K clf;
-				V elt;
-				maillon * suivant;	
-		};
-		
-		maillon * tete;
-		maillon * queue;
-		int nb;
+		V * Tableau;
+		int taille;
 		
 	public :
-
-		AListe ()// constructeur, crée une AListe vide
-		~AListe () // destructeur, libère la mémoire
+		Hashage(int taille)
+		int hash(K clf)
 		void associer(K clf,V valr) //ajoute le couple (clf,valr) ou change la valeur associée à clf s'il y en avait une
 		bool estALVide() //VRAI ssi aucun couple n'est stocké
 		V valeurAssociée(K clf) //donne la valeur associée à la clef clf
@@ -26,63 +16,36 @@ class Associative{
 		void trousseau(K* clfs, int ref N ) // mets les clefs présentes dans le tableau pointé par clfs (à déclarer à l'extérieur) et mets dans N leur nombre
 		
 }
-Associative::AListe(){
-	this->tete = NULL;
-	this->queue=NULL;
-	this->nb=0;
+
+Hashage::Hashage(int taille){
+	this->Tableau= new V[taille];
+	this->taille=taille;
+	}
+int Hashage::hash(K clf, V valr){
+	if(clf.name()==string)
+    int i = 0, nombreHache = 0;
+    for (i = 0 ; valr[i] != '\0' ; i++)
+    {
+        nombreHache += chaine[i];
+    }
+    nombreHache %= this->taille;
+    return nombreHache;
+
+}
+void Hashage::associer(K clf,V valr){
+	if(clf>)
+	this->Tableau
 }
 
-Associative::~AListe(){
-		
-}
-
-void Associative::associer(K clf,V valr){
-	maillon * courant = this->tete;
-		while(courant != NULL && trouve==false){
-				if(courant->clf==cle){
-					trouve=true;
-				}
-				else{
-					courant = courant->suivant;
-				}
-		}
-		if(trouve==false){
-			maillon * mama;
-			mama->suivant=NULL;
-			mama->clf=clf;
-			mama->elt=valr;
-			this->queue=mama;
-			this->nb++; 
-		}
-		else{
-			courant->elt=valr;
-		}
-}
-
-bool Associative::estALVide(){
+bool Hashage::estALVide(){
 		return(this->nb==0);
 }
 
-V Associative::valeurAssociée(K clf){
-	if(this->nb!=0){
-		maillon * courant = this->tete;
-		while(courant != NULL && trouve==false){
-			if(courant->clf==cle){
-				trouve=true;
-			}
-			else{
-				courant = courant->suivant;
-			}
-		}
-		if(trouve==true){
-				return courant->elt;
-			}
-		else
-			return NULL;
-	}
+V Hashage::valeurAssociée(K clf){
+	
 }
 
-void Associative::dissocier(K clf){
+void Hashage::dissocier(K clf){
 		if(this->nb >= 1){
 			courant=this->tete;
 			if(courant->clf == clf){
@@ -109,7 +72,7 @@ void Associative::dissocier(K clf){
 }
 
 
-bool Associative::estClef(k cle){
+bool Hashage::estClef(k cle){
 		
 		if(this->nb==0){
 			return false;
@@ -127,7 +90,7 @@ bool Associative::estClef(k cle){
 		}
 }
 
-void Associative::trousseau(K* clfs, int ref N ){
+void Hashage::trousseau(K* clfs, int ref N ){
 		if(this->nb!=0){
 				maillon * courant=this->tete;
 				N=0;
@@ -143,5 +106,3 @@ void Associative::trousseau(K* clfs, int ref N ){
 				N=0;
 		}
 }
-
-
